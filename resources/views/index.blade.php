@@ -8,8 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <script src="https://kit.fontawesome.com/b95a244235.js" crossorigin="anonymous"></script>
 
-    <title>MOCA_SHOPE</title>
+    <title>BELI_SHOPE</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -35,7 +36,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">USER MOCA <sup></sup></div>
+                <div class="sidebar-brand-text mx-3">USER<sup></sup></div>
             </a>
 
             <!-- Divider -->
@@ -44,7 +45,7 @@
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
                 <a class="nav-link" href="/">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="fa-solid fa-house-user"></i>
                     <span>Dashboard</span></a>
             </li>
 
@@ -53,21 +54,21 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Interface
+               Master
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Components</span>
+                    <i class="fa-solid fa-bread-slice"></i>
+                    <span>Supplier</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Components:</h6>
-                        <a class="collapse-item" href="/buttons">Buttons</a>
-                        <a class="collapse-item" href="/cards">Cards</a>
+                        <h6 class="collapse-header">Pemasok</h6>
+                        <a class="collapse-item" href="/buttons">Baru</a>
+                        <a class="collapse-item" href="/cards">lama</a>
                     </div>
                 </div>
             </li>
@@ -76,35 +77,26 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Utilities</span>
+                    <i class="fa-solid fa-box-open"></i>
+                    <span>Barang</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item" href="/utilities-color">Colors</a>
-                        <a class="collapse-item" href="/utilities-border">Borders</a>
-                        <a class="collapse-item" href="/utilities-animation">Animations</a>
-                        <a class="collapse-item" href="/utilities-other">Other</a>
+                        <h6 class="collapse-header">Quantity</h6>
+                        <a class="collapse-item" href="/utilities-color">Origin</a>
+                        <a class="collapse-item" href="/utilities-border">Kw</a>
                     </div>
                 </div>
             </li>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Addons
-            </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                     aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Pages</span>
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span>Pembelian</span>
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
@@ -113,9 +105,6 @@
                         <a class="collapse-item" href="/register">Register</a>
                         <a class="collapse-item" href="/forgot-password">Forgot Password</a>
                         <div class="collapse-divider"></div>
-                        <h6 class="collapse-header">Other Pages:</h6>
-                        <a class="collapse-item" href="/404">404 Page</a>
-                        <a class="collapse-item" href="/blank">Blank Page</a>
                     </div>
                 </div>
             </li>
@@ -123,19 +112,22 @@
             <!-- Nav Item - Charts -->
             <li class="nav-item">
                 <a class="nav-link" href="/charts">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Charts</span></a>
+                    <i class="fa-solid fa-tent-arrow-left-right"></i>
+                    <span>Transaction</span></a>
             </li>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
                 <a class="nav-link" href="/tables">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Tables</span></a>
+                    <i class="fa-solid fa-people-group"></i>
+                    <span>Pegawai</span></a>
             </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
+              <!-- Nav Item - Tables -->
+              <li class="nav-item">
+                <a class="nav-link" href="/tables">
+                    <i class="fa-solid fa-money-bill-trend-up"></i>
+                    <span>Laporan</span></a>
+            </li>
 
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
