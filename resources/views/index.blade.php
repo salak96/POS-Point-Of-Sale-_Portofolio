@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <script src="https://kit.fontawesome.com/b95a244235.js" crossorigin="anonymous"></script>
 
-    <title>BELI_SHOPE</title>
+    <title>{{ $title ?? config('app.name') }}</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -111,20 +111,20 @@
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="/charts">
+                <a class="nav-link" href="#">
                     <i class="fa-solid fa-tent-arrow-left-right"></i>
                     <span>Transaction</span></a>
             </li>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="/tables">
+                <a class="nav-link" href="#">
                     <i class="fa-solid fa-people-group"></i>
                     <span>Pegawai</span></a>
             </li>
               <!-- Nav Item - Tables -->
               <li class="nav-item">
-                <a class="nav-link" href="/tables">
+                <a class="nav-link" href="#">
                     <i class="fa-solid fa-money-bill-trend-up"></i>
                     <span>Laporan</span></a>
             </li>
