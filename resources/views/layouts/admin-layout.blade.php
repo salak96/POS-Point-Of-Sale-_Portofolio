@@ -65,7 +65,7 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ route('kategori.index') }}">
                     <i class="fa-solid fa-cubes"></i>
                     <span>Kategori</span></a>
             </li>
