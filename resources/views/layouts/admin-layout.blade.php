@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<title>{{ $title ?? config('app.name') }}</title>
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ $title ?? config('app.name') }}</title>
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
@@ -22,6 +21,8 @@
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
+    <!-- Custom styles for this template -->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/b95a244235.js" crossorigin="anonymous"></script>
@@ -50,7 +51,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="/">
+                <a class="nav-link" href="{{ route ('dashboard') }}">
                     <i class="fa-solid fa-house-user"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -176,7 +177,7 @@
 
                 <!-- Topbar Navbar -->
                 <ul class="navbar-nav ml-auto">
-                 
+
                     <!-- Nav Item - Search Dropdown (Visible Only XS) -->
                     <li class="nav-item dropdown no-arrow d-sm-none">
                         <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
@@ -321,7 +322,7 @@
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="mr-2 d-none d-lg-inline text-gray-600 small">
                                 {{ auth()->user()->name }}
-                
+
                             </span>
                             <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
                         </a>
@@ -340,33 +341,32 @@
                                 <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Settings
                             </a>
-                                        <!-- 2Authentication -->
-                                <form method="POST" action="{{ route('logout') }}">
-                                    @csrf
+                            <!-- 2Authentication -->
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
 
-                                    <x-responsive-nav-link :href="route('logout')"
-                                            onclick="event.preventDefault();
+                                <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault();
                                                         this.closest('form').submit();">
-                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        {{ __('Log Out') }}
-                                    </x-responsive-nav-link>
-                                </form>
-                                        
-                                    </li>
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    {{ __('Log Out') }}
+                                </x-responsive-nav-link>
+                            </form>
 
-                                </ul>
+                    </li>
 
-                            </nav>
+                </ul>
+
+            </nav>
 
             <!-- End of Topbar -->
 
 
-   <!-- Main Content -->
-   <main>
+            <!-- Main Content -->
+            <main>
 
-    {{ $slot }}
-</main>
-<!-- End of Main Content -->
+                {{ $slot }}
+            </main>
+            <!-- End of Main Content -->
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
@@ -408,13 +408,9 @@
             </div>
         </div>
     </div> --}}
-    
-    {{-- <form action="" {{ route('logout') }} method="POST" id="logoutModal" style="display: none">
-        @csrf
-    </form> --}}
-        
-        
-    
+
+
+
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
@@ -433,6 +429,18 @@
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
 
-</body>
 
+    <!-- Custom styles for this page -->
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+
+    <!-- Page level plugins -->
+    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="js/demo/datatables-demo.js"></script>
+
+    {{-- @stack('scripts') --}}
+</body>
 </html>
