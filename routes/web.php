@@ -28,6 +28,4 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('/kategori',KategoriController::class);
 });
 
-
-
 require __DIR__.'/auth.php';

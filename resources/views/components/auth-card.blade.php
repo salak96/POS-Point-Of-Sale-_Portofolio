@@ -9,6 +9,16 @@
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
+    <style>
+        .bg-login-image { 
+            background-image: url("img/undraw_shopping.svg");
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+
+        }
+    </style>
+
 <body class="bg-gradient-primary">
 
    <div class="container">
@@ -59,11 +69,5 @@
    <script src="js/sb-admin-2.min.js"></script>
 
 </body>
-   {{-- <div>
-       {{ $logo }}
-   </div>
 
-   <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
-       {{ $slot }}
-   </div> --}}
 </div>

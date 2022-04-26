@@ -27,7 +27,9 @@
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/b95a244235.js" crossorigin="anonymous"></script>
 
-
+    <!-- Custom styles for this page -->
+  
+     
 </head>
 
 <body id="page-top">
@@ -363,8 +365,7 @@
 
             <!-- Main Content -->
             <main>
-
-                {{ $slot }}
+                @yield('content')
             </main>
             <!-- End of Main Content -->
             <!-- Footer -->
@@ -411,7 +412,7 @@
 
 
 
-
+    
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -441,6 +442,9 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/datatables-demo.js"></script>
 
-    {{-- @stack('scripts') --}}
+    
+    @stack('scripts')
+
 </body>
 </html>
+
