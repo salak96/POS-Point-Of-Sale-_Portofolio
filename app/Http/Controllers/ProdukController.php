@@ -25,7 +25,7 @@ class ProdukController extends Controller
     {
         $produk = Produk::leftJoin('kategori', 'kategori.id_kategori', 'produk.id_kategori')
             ->select('produk.*', 'nama_kategori')
-            // ->orderBy('kode_produk', 'asc')
+            ->orderBy('kode_produk', 'asc')
             ->get();
 
         return datatables()
@@ -37,7 +37,7 @@ class ProdukController extends Controller
                 ';
             })
             ->addColumn('kode_produk', function ($produk) {
-                return '<span class="label label-success">'. $produk->kode_produk .'</span>';
+                return '<span class="badgel badge-success">'. $produk->kode_produk .'</span>';
             })
             ->addColumn('harga_beli', function ($produk) {
                 return format_uang($produk->harga_beli);
@@ -78,8 +78,8 @@ class ProdukController extends Controller
      */
     public function store(Request $request)
     {
-        // $produk = Produk::latest()->first() ?? new Produk();
-        // $request['kode_produk'] = 'P'. tambah_nol_didepan((int)$produk->id_produk +1, 6);
+        $produk = Produk::latest()->first() ?? new Produk();
+        $request['kode_produk'] = 'P'. tambah_nol_didepan((int)$produk->id_produk +1, 6);
 
         $produk = Produk::create($request->all());
 
