@@ -15,7 +15,7 @@ return new class extends Migration
     {
         schema::create('produk', function (Blueprint $table) {
             $table->increments('id_produk');
-            $table->integer('id_kategori');
+            $table->integer('id_produk');
             $table->string('nama_produk')->unique();
             $table->string('merk')->nullable();
             $table->integer('harga_beli');
