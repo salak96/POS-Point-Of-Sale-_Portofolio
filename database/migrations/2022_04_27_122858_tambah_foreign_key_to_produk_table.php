@@ -14,12 +14,11 @@ class TambahForeignKeyToProdukTable extends Migration
     public function up()
     {
         Schema::table('produk', function (Blueprint $table) {
-            $table->unsignedInteger('id_produk')->change();
-            $table->foreign('id_produk')
-            ->references('id_produk')
-            ->on('produk')
-            ->onUpdate('restrict')
-            ->onDelete('restrict');
+            $table->foreign('id_kategori')
+                  ->references('id_kategori')
+                  ->on('kategori')
+                  ->onUpdate('restrict')
+                  ->onDelete('restrict');
         });
     }
 
@@ -31,7 +30,7 @@ class TambahForeignKeyToProdukTable extends Migration
     public function down()
     {
         Schema::table('produk', function (Blueprint $table) {
-            $table->dropForeign('produk_id_produk_foreign');
+            $table->dropForeign('produk_id_kategori_foreign');
         });
     }
 }
