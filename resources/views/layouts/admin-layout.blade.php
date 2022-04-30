@@ -77,7 +77,7 @@
                     <span>Produk</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ route ('member.index') }}">
                     <i class="fa-solid fa-people-roof"></i>
                     <span>Member</span></a>
             </li>
