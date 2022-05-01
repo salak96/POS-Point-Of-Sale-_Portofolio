@@ -73,12 +73,12 @@
             @foreach ($datamember as $key => $data)
                 <tr>
                     @foreach ($data as $item)
-                        <td class="text-center">
+                        <td class="text-center" with="50%">
                             <div class="box">
-                                <img src="{{ public_path($setting->path_kartu_member) }}" alt="card" width="50%">
-                                <div class="logo">
-                                    <p>{{ $setting->nama_perusahaan }}</p>
-                                    <img src="{{ public_path($setting->path_logo) }}" alt="logo">
+                                <img src="{{ asset('/public/img/member.png') }}" alt="card" width="50%">
+                                <div class="member">
+                                    <p>{{ config('app.name') }}</p>
+                                    <img src="{{ asset('/public/img/logo.png') }}" alt="logo">
                                 </div>
                                 <div class="nama">{{ $item->nama }}</div>
                                 <div class="telepon">{{ $item->telepon }}</div>
