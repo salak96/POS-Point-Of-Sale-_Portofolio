@@ -1,13 +1,9 @@
-@extends('layouts.admin-layout')
-
-@section('title')
-    Daftar Produk
-@endsection
-
-@section('breadcrumb')
-    @parent
-    <li class="active">Daftar Produk</li>
-@endsection
+@extends('layouts.admin-layout',
+[
+    'title' => "Daftar produk",
+   
+    ]
+)
 
 @section('content')
 <div class="row">

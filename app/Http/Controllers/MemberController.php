@@ -77,7 +77,7 @@ class MemberController extends Controller
         $member->alamat = $request->alamat;
         $member->save();
 
-        return response()->json('Data berhasil disimpan', 200);
+        return redirect()->route('member.index')->with('success', 'Data berhasil ditambahkan');
     }
 
     /**

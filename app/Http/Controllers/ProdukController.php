@@ -83,7 +83,8 @@ class ProdukController extends Controller
 
         $produk = Produk::create($request->all());
 
-        return response()->json('Data berhasil disimpan', 200);
+      
+        return redirect()->route('produk.index')->with('success', 'Data berhasil ditambahkan');
     }
 
     /**

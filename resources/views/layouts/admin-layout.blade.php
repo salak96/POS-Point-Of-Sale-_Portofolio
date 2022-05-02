@@ -82,7 +82,7 @@
                     <span>Member</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ route ('supplier.index') }}">
                     <i class="fa-brands fa-supple"></i>
                     <span>Supplier</span></a>
             </li>
@@ -363,9 +363,14 @@
 
 
             <!-- Main Content -->
+      
             <main>
+                <div class="container-fluid">
+                <h1 class="h3 mb-0 text-gray-800">{{ $title ??"" }}</h1>
                 @yield('content')
+                </div>
             </main>
+
             <!-- End of Main Content -->
             <!-- Footer -->
             <footer class="sticky-footer bg-white">

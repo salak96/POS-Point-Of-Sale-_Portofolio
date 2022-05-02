@@ -1,13 +1,10 @@
-@extends('layouts.admin-layout')
+@extends('layouts.admin-layout',
+[
+    'title' => "Daftar kategori",
+   
+    ]
+)
 
-@section('title')
-    Daftar Kategori
-@endsection
-
-@section('breadcrumb')
-    @parent
-    <li class="active">Daftar Kategori</li>
-@endsection
 
 @section('content')
 <div class="row">
