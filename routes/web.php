@@ -3,6 +3,8 @@ use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\PengeluaranController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -28,6 +30,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::group(['middleware' => ['auth']], function () {
+    
     //kategori
     Route::get('/kategori/data', [KategoriController::class,'data'])->name('kategori.data');
     Route::resource('/kategori',KategoriController::class);
@@ -45,6 +48,10 @@ Route::group(['middleware' => ['auth']], function () {
     //supplier
     Route::get('/supplier/data', [SupplierController::class, 'data'])->name('supplier.data');
     Route::resource('/supplier', SupplierController::class);
+
+     //pengeluaran
+     Route::get('/pengeluaran/data', [PengeluaranController::class, 'data'])->name('pengeluaran.data');
+     Route::resource('/pengeluaran', PengeluaranController::class);
 
 });
 

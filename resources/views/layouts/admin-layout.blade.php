@@ -94,7 +94,7 @@
             </div>
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ route ('pengeluaran.index') }}">
                     <i class="fa-solid fa-box-open"></i>
                     <span>Pengeluaran</span></a>
             </li>
