@@ -100,7 +100,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link"  href="{{ route ('pembelian.index') }}">
                     <i class="fa-solid fa-cart-shopping"></i>
                     <span>Pembelian</span></a>
             </li>

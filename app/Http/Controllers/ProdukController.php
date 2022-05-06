@@ -32,8 +32,8 @@ class ProdukController extends Controller
             ->of($produk)
             ->addIndexColumn()
             ->addColumn('select_all', function ($produk) {
-                return '
-                    <input type="checkbox" name="id_produk[]" value="'. $produk->id_produk .'">
+                return'
+                    <input type="checkbox" name="id_produk[]" value="'.$produk->id_produk.'">
                 ';
             })
             ->addColumn('kode_produk', function ($produk) {

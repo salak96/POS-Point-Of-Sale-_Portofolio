@@ -87,11 +87,11 @@
                     });
             }
         });
-
-        $('[name=select_all]').on('click', function () {
-            $(':checkbox').prop('checked', this.checked);
+        $ ('[name=select_all]').on('click', function () {
+            $(':checkbox').prop ('checked', this.checked);
         });
     });
+    
 
     function addForm(url) {
         $('#modal-form').modal('show');
