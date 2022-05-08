@@ -11,15 +11,13 @@
         <div class="box">
             <div class="box-header with-border">
                 <button onclick="addForm()" class="btn btn-success btn-xs btn-flat"><i class="fa fa-plus-circle"></i> Transaksi Baru</button>
-                @empty (! session ('id_pembelian'))
-
-            
-                <a href="{{ route('pembelian_detail.index') }}" class="btn btn-info btn-xs btn-flat"><i class="fa fa-plus-edit"></i> Transaksi Aktif</a>
+                @empty(! session('id_pembelian'))
+                <a href="{{ route('pembelian_detail.index') }}" class="btn btn-info btn-xs btn-flat"><i class="fa fa-pencil"></i> Transaksi Aktif</a>
                 @endempty
             </div>
             <br>
             <div class="box-body table-responsive">
-                <table class="table table-stiped table-bordered">
+                <table class="table table-stiped table-bordered table-pembelian">
                     <thead>
                         <th width="5%">No</th>
                         <th>Tanggal</th>
@@ -42,10 +40,9 @@
 
 @push('scripts')
 <script>
-    let table;
-
+    let table, table1;
     $(function () {
-        table = $('.table').DataTable({
+        table = $('.table-pembelian').DataTable({
             responsive: true,
             processing: true,
             serverSide: true,
@@ -64,36 +61,30 @@
                 {data: 'aksi', searchable: false, sortable: false},
             ]
         });
-
- 
+        $('.table-supplier').DataTable();
+        table1 = $('.table-detail').DataTable({
+            processing: true,
+            bSort: false,
+            dom: 'Brt',
+            columns: [
+                {data: 'DT_RowIndex', searchable: false, sortable: false},
+                {data: 'kode_produk'},
+                {data: 'nama_produk'},
+                {data: 'harga_beli'},
+                {data: 'jumlah'},
+                {data: 'subtotal'},
+            ]
+        })
     });
-
     function addForm() {
         $('#modal-supplier').modal('show');
-      
     }
+    function showDetail(url) {
+        $('#modal-detail').modal('show');
+        table1.ajax.url(url);
+        table1.ajax.reload();
 
-    function editForm(url) {
-        $('#modal-form').modal('show');
-        $('#modal-form .modal-title').text('Edit Supplier');
-
-        $('#modal-form form')[0].reset();
-        $('#modal-form form').attr('action', url);
-        $('#modal-form [name=_method]').val('put');
-        $('#modal-form [name=nama]').focus();
-
-        $.get(url)
-            .done((response) => {
-                $('#modal-form [name=nama]').val(response.nama);
-                $('#modal-form [name=telepon]').val(response.telepon);
-                $('#modal-form [name=alamat]').val(response.alamat);
-            })
-            .fail((errors) => {
-                alert('Tidak dapat menampilkan data');
-                return;
-            });
     }
-
     function deleteData(url) {
         if (confirm('Yakin ingin menghapus data terpilih?')) {
             $.post(url, {
