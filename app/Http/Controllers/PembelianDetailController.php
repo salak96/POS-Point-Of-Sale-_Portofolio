@@ -17,6 +17,7 @@ class PembelianDetailController extends Controller
         $supplier = Supplier::find(session('id_supplier'));
         $diskon = Pembelian::find($id_pembelian)->diskon ?? 0;
 
+
         if (! $supplier) {
             abort(404);
         }

@@ -26,9 +26,6 @@ class MemberController extends Controller
         return datatables()
             ->of($member)
             ->addIndexColumn()
-            ->addColumn('kode_member',function ($member) {
-                return '<span class="label label-success">'. $member->kode_member .'</span>';
-            })
             ->addColumn('select_all', function ($produk) {
                 return '
                     <input type="checkbox" name="id_member[]" value="'. $produk->id_member .'">
@@ -77,7 +74,7 @@ class MemberController extends Controller
         $member->alamat = $request->alamat;
         $member->save();
 
-        return redirect()->route('member.index')->with('success', 'Data berhasil ditambahkan');
+        return response()->json('Data berhasil disimpan', 200);
     }
 
     /**
@@ -115,7 +112,7 @@ class MemberController extends Controller
     {
         $member = Member::find($id)->update($request->all());
 
-        return redirect()->route('member.index')->with('success', 'Data berhasil ditambahkan');
+        return response()->json('Data berhasil disimpan', 200);
     }
 
     /**
@@ -141,10 +138,11 @@ class MemberController extends Controller
         }
 
         $datamember = $datamember->chunk(2);
+        $setting    = Setting::first();
 
         $no  = 1;
-        $pdf = PDF::loadView('member.cetak', compact('datamember','no'));
-        $pdf->setPaper('a4', 'potrait');
+        $pdf = PDF::loadView('member.cetak', compact('datamember', 'no', 'setting'));
+        $pdf->setPaper('potrait');
         return $pdf->stream('member.pdf');
     }
 }
