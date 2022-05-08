@@ -98,7 +98,7 @@ class KategoriController extends Controller
         $kategori->nama_kategori = $request->nama_kategori;
         $kategori->update();
 
-        return response()->json('Data berhasil disimpan', 200);
+        return redirect()->route('kategori.index')->with('success', 'Data berhasil ditambahkan');
     }
 
     /**

@@ -11,6 +11,11 @@
         <div class="box">
             <div class="box-header with-border">
                 <button onclick="addForm()" class="btn btn-success btn-xs btn-flat"><i class="fa fa-plus-circle"></i> Transaksi Baru</button>
+                @empty (! session ('id_pembelian'))
+
+            
+                <a href="{{ route('pembelian_detail.index') }}" class="btn btn-info btn-xs btn-flat"><i class="fa fa-plus-edit"></i> Transaksi Aktif</a>
+                @endempty
             </div>
             <br>
             <div class="box-body table-responsive">
@@ -32,6 +37,7 @@
 </div>
 
 @includeIf('pembelian.supplier')
+@includeIf('pembelian.detail')
 @endsection
 
 @push('scripts')
@@ -40,20 +46,23 @@
 
     $(function () {
         table = $('.table').DataTable({
-            // responsive: true,
-            // processing: true,
-            // serverSide: true,
-            // autoWidth: false,
-            // ajax: {
-            //     url: '{{ route('supplier.data') }}',
-            // },
-            // columns: [
-            //     {data: 'DT_RowIndex', searchable: false, sortable: false},
-            //     {data: 'nama'},
-            //     {data: 'telepon'},
-            //     {data: 'alamat'},
-            //     {data: 'aksi', searchable: false, sortable: false},
-            // ]
+            responsive: true,
+            processing: true,
+            serverSide: true,
+            autoWidth: false,
+            ajax: {
+                url: '{{ route('pembelian.data') }}',
+            },
+            columns: [
+                {data: 'DT_RowIndex', searchable: false, sortable: false},
+                {data: 'tanggal'},
+                {data: 'supplier'},
+                {data: 'total_item'},
+                {data: 'total_harga'},
+                {data: 'diskon'},
+                {data: 'bayar'},
+                {data: 'aksi', searchable: false, sortable: false},
+            ]
         });
 
  

@@ -14,6 +14,42 @@ class PembelianController extends Controller
         return view('pembelian.index', compact('supplier'));
    
     }
+    public function data ()
+    {
+       
+        $pembelian = Pembelian::orderBy('id_pembelian', 'desc')->get();
+
+        return datatables()
+            ->of($pembelian)
+            ->addIndexColumn()
+            ->addColumn('total_item', function ($pembelian) {
+                return format_uang($pembelian->total_item);
+            })
+            ->addColumn('total_harga', function ($pembelian) {
+                return 'Rp.' .format_uang($pembelian->total_harga);
+            })
+            ->addColumn('bayar', function ($pembelian) {
+                return 'Rp.' .format_uang($pembelian->bayar);
+            })
+            ->addColumn('tanggal', function ($pembelian) 
+            {
+                return tanggal_indonesia($pembelian->created_at, false);
+            })
+            ->addColumn('supplier', function ($pembelian)
+            {
+                return $pembelian->supplier->nama;
+            })
+            ->addColumn('aksi', function ($pembelian) {
+                return '
+                <div class="btn-group">
+                    <button onclick="detail(`'. route('pembelian.show', $pembelian->id_pembelian) .'`)" class="btn btn-xs btn-info btn-flat"><i class="fa fa-eye"></i></button>
+                </div>
+                ';
+            })
+            ->rawColumns(['aksi'])
+            ->make(true);
+    }
+
     public function create ($id)
     {
       $pembelian = new Pembelian();
@@ -24,9 +60,29 @@ class PembelianController extends Controller
       $pembelian->bayar       = 0;
       $pembelian->save();
 
-      session(['id_pembelian',$pembelian->id_pembelian]);
-      session(['id_supplier',$pembelian->id_supplier]);
+      session(['id_pembelian'=> $pembelian->id_pembelian]);
+      session(['id_supplier'=>  $pembelian->id_supplier]);
 
       return redirect()->route('pembelian_detail.index');
     }
 }
+  
+    // public function store(Request $request)
+    // {
+    //     $pembelian = Pembelian::findOrFail($request->id_pembelian);
+    //     $pembelian->total_item = $request->total_item;
+    //     $pembelian->total_harga = $request->total;
+    //     $pembelian->diskon = $request->diskon;
+    //     $pembelian->bayar = $request->bayar;
+    //     $pembelian->update();
+
+    //     $detail = PembelianDetail::where('id_pembelian', $pembelian->id_pembelian)->get();
+
+    //     foreach ($detail as $item) {
+    //         $produk = Produk::find($item->id_produk);
+    //         $produk->stok += $item->jumlah;
+    //         $produk->update();
+    //     }
+
+    //     return redirect()->route('pembelian.index');
+    // }

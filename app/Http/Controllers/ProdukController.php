@@ -123,7 +123,7 @@ class ProdukController extends Controller
         $produk = Produk::find($id);
         $produk->update($request->all());
 
-        return response()->json('Data berhasil disimpan', 200);
+        return redirect()->route('produk.index')->with('success', 'Data berhasil ditambahkan');
     }
 
     /**

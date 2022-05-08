@@ -2,134 +2,113 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Pembelian;
 use App\Models\PembelianDetail;
 use App\Models\Produk;
 use App\Models\Supplier;
+use Illuminate\Http\Request;
 
-class PembelianController extends Controller
+class PembelianDetailController extends Controller
 {
     public function index()
     {
-        $supplier = Supplier::orderBy('nama')->get();
+        $id_pembelian = session('id_pembelian');
+        $produk = Produk::orderBy('nama_produk')->get();
+        $supplier = Supplier::find(session('id_supplier'));
+        $diskon = Pembelian::find($id_pembelian)->diskon ?? 0;
 
-        return view('pembelian.index', compact('supplier'));
+        if (! $supplier) {
+            abort(404);
+        }
+
+        return view('pembelian_detail.index', compact('id_pembelian', 'produk', 'supplier', 'diskon'));
     }
-
-    public function data()
+      public function data($id)
     {
-        $pembelian = Pembelian::orderBy('id_pembelian', 'desc')->get();
+        $detail = PembelianDetail::with('produk')
+            ->where('id_pembelian', $id)
+            ->get();
+        $data = array();
+        $total = 0;
+        $total_item = 0;
+
+        foreach ($detail as $item) {
+            $row = array();
+            $row['kode_produk'] = '<span class="label label-success">'. $item->produk['kode_produk'] .'</span';
+            $row['nama_produk'] = $item->produk['nama_produk'];
+            $row['harga_beli']  = 'Rp. '. format_uang($item->harga_beli);
+            $row['jumlah']      = '<input type="number" class="form-control input-sm quantity" data-id="'. $item->id_pembelian_detail .'" value="'. $item->jumlah .'">';
+            $row['subtotal']    = 'Rp. '. format_uang($item->subtotal);
+            $row['aksi']        = '<div class="btn-group">
+                                    <button onclick="deleteData(`'. route('pembelian_detail.destroy', $item->id_pembelian_detail) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="fa fa-trash"></i></button>
+                                </div>';
+            $data[] = $row;
+
+            $total += $item->harga_beli * $item->jumlah;
+            $total_item += $item->jumlah;
+        }
+        $data[] = [
+            'kode_produk' => '
+                <div class="total hide">'. $total .'</div>
+                <div class="total_item hide">'. $total_item .'</div>',
+            'nama_produk' => '',
+            'harga_beli'  => '',
+            'jumlah'      => '',
+            'subtotal'    => '',
+            'aksi'        => '',
+        ];
 
         return datatables()
-            ->of($pembelian)
+            ->of($data)
             ->addIndexColumn()
-            ->addColumn('total_item', function ($pembelian) {
-                return format_uang($pembelian->total_item);
-            })
-            ->addColumn('total_harga', function ($pembelian) {
-                return 'Rp. '. format_uang($pembelian->total_harga);
-            })
-            ->addColumn('bayar', function ($pembelian) {
-                return 'Rp. '. format_uang($pembelian->bayar);
-            })
-            ->addColumn('tanggal', function ($pembelian) {
-                return tanggal_indonesia($pembelian->created_at, false);
-            })
-            ->addColumn('supplier', function ($pembelian) {
-                return $pembelian->supplier->nama;
-            })
-            ->editColumn('diskon', function ($pembelian) {
-                return $pembelian->diskon . '%';
-            })
-            ->addColumn('aksi', function ($pembelian) {
-                return '
-                <div class="btn-group">
-                    <button onclick="showDetail(`'. route('pembelian.show', $pembelian->id_pembelian) .'`)" class="btn btn-xs btn-info btn-flat"><i class="fa fa-eye"></i></button>
-                    <button onclick="deleteData(`'. route('pembelian.destroy', $pembelian->id_pembelian) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="fa fa-trash"></i></button>
-                </div>
-                ';
-            })
-            ->rawColumns(['aksi'])
+            ->rawColumns(['aksi', 'kode_produk', 'jumlah'])
             ->make(true);
-    }
-
-    public function create($id)
-    {
-        $pembelian = new Pembelian();
-        $pembelian->id_supplier = $id;
-        $pembelian->total_item  = 0;
-        $pembelian->total_harga = 0;
-        $pembelian->diskon      = 0;
-        $pembelian->bayar       = 0;
-        $pembelian->save();
-
-        session(['id_pembelian' => $pembelian->id_pembelian]);
-        session(['id_supplier' => $pembelian->id_supplier]);
-
-        return redirect()->route('pembelian_detail.index');
     }
 
     public function store(Request $request)
     {
-        $pembelian = Pembelian::findOrFail($request->id_pembelian);
-        $pembelian->total_item = $request->total_item;
-        $pembelian->total_harga = $request->total;
-        $pembelian->diskon = $request->diskon;
-        $pembelian->bayar = $request->bayar;
-        $pembelian->update();
-
-        $detail = PembelianDetail::where('id_pembelian', $pembelian->id_pembelian)->get();
-        foreach ($detail as $item) {
-            $produk = Produk::find($item->id_produk);
-            $produk->stok += $item->jumlah;
-            $produk->update();
+        $produk = Produk::where('id_produk', $request->id_produk)->first();
+        if (! $produk) {
+            return response()->json('Data gagal disimpan', 400);
         }
 
-        return redirect()->route('pembelian.index');
+        $detail = new PembelianDetail();
+        $detail->id_pembelian = $request->id_pembelian;
+        $detail->id_produk = $produk->id_produk;
+        $detail->harga_beli = $produk->harga_beli;
+        $detail->jumlah = 1;
+        $detail->subtotal = $produk->harga_beli;
+        $detail->save();
+        
+        return response()->json('Data berhasil disimpan', 200);
     }
 
-    public function show($id)
+    public function update(Request $request, $id)
     {
-        $detail = PembelianDetail::with('produk')->where('id_pembelian', $id)->get();
-
-        return datatables()
-            ->of($detail)
-            ->addIndexColumn()
-            ->addColumn('kode_produk', function ($detail) {
-                return '<span class="label label-success">'. $detail->produk->kode_produk .'</span>';
-            })
-            ->addColumn('nama_produk', function ($detail) {
-                return $detail->produk->nama_produk;
-            })
-            ->addColumn('harga_beli', function ($detail) {
-                return 'Rp. '. format_uang($detail->harga_beli);
-            })
-            ->addColumn('jumlah', function ($detail) {
-                return format_uang($detail->jumlah);
-            })
-            ->addColumn('subtotal', function ($detail) {
-                return 'Rp. '. format_uang($detail->subtotal);
-            })
-            ->rawColumns(['kode_produk'])
-            ->make(true);
+        $detail = PembelianDetail::find($id);
+        $detail->jumlah = $request->jumlah;
+        $detail->subtotal = $detail->harga_beli * $request->jumlah;
+        $detail->update();
     }
 
     public function destroy($id)
     {
-        $pembelian = Pembelian::find($id);
-        $detail    = PembelianDetail::where('id_pembelian', $pembelian->id_pembelian)->get();
-        foreach ($detail as $item) {
-            $produk = Produk::find($item->id_produk);
-            if ($produk) {
-                $produk->stok -= $item->jumlah;
-                $produk->update();
-            }
-            $item->delete();
-        }
-
-        $pembelian->delete();
+        $detail = PembelianDetail::find($id);
+        $detail->delete();
 
         return response(null, 204);
+    }
+
+    public function loadForm($diskon, $total)
+    {
+        $bayar = $total - ($diskon / 100 * $total);
+        $data  = [
+            'totalrp' => format_uang($total),
+            'bayar' => $bayar,
+            'bayarrp' => format_uang($bayar),
+            'terbilang' => ucwords(terbilang($bayar). ' Rupiah')
+        ];
+
+        return response()->json($data);
     }
 }

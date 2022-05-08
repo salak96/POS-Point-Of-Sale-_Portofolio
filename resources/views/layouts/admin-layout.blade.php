@@ -27,7 +27,7 @@
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/b95a244235.js" crossorigin="anonymous"></script>
 
-
+    @stack('css')
 
 </head>
 
@@ -366,7 +366,8 @@
       
             <main>
                 <div class="container-fluid">
-                <h1 class="h3 mb-0 text-gray-800">{{ $title ??"" }}</h1>
+                    <h1 class="h3 mb-0 text-gray-800">{{ $title ??"" }}</h1>
+                    <br>
                 @yield('content')
                 </div>
             </main>

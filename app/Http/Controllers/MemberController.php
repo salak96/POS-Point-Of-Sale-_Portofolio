@@ -115,7 +115,7 @@ class MemberController extends Controller
     {
         $member = Member::find($id)->update($request->all());
 
-        return response()->json('Data berhasil disimpan', 200);
+        return redirect()->route('member.index')->with('success', 'Data berhasil ditambahkan');
     }
 
     /**
