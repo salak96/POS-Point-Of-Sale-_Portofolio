@@ -100,40 +100,38 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link"  href="{{ route ('pembelian.index') }}">
+                <a class="nav-link" href="{{ route ('pembelian.index') }}">
                     <i class="fa-solid fa-cart-shopping"></i>
                     <span>Pembelian</span></a>
             </li>
 
-            <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="fa-solid fa-store"></i>
-                    <span>Penjualan</span></a>
-            </li>
-
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="fa-solid fa-money-bill-transfer"></i>
-                    <span>Transaksi Lama</span></a>
-            </li>
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="fa-solid fa-money-bill-trend-up"></i>
-                    <span>Transaksi Baru</span></a>
-            </li>
             <!-- Heading -->
-            <div class="sidebar-heading">
-                REPORT
-            </div>
-
             <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="fa-solid fa-book-open"></i>
-                    <span>Laporan</span></a>
-            </li>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+                    aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Penjualan</span>
+                </a>
+                </a>
+                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-black py-2 collapse-inner rounded">
+                        <a class="nav-link" href="{{ route('transaksi.index') }}">
+                            <i class="fa-solid fa-money-bill-trend-up"></i>
+                            <span>Transaksi aktif</span></a>
+                        <a class="nav-link" href="{{ route('transaksi.baru') }}">
+                            <i class="fa-solid fa-money-bill-trend-up"></i>
+                            <span>Transaksi Baru</span></a>
+                    </div>
+                </div>
+                    <div class="sidebar-heading">
+                     Report
+                    </div>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fa-brands fa-readme"></i>
+                            <span>Laporan</span></a>
+                    </li>
+        
             <!-- Heading -->
             <div class="sidebar-heading">
                 SYSTEM
@@ -363,12 +361,12 @@
 
 
             <!-- Main Content -->
-      
+
             <main>
                 <div class="container-fluid">
                     <h1 class="h3 mb-0 text-gray-800">{{ $title ??"" }}</h1>
                     <br>
-                @yield('content')
+                    @yield('content')
                 </div>
             </main>
 
