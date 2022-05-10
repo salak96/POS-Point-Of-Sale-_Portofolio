@@ -118,7 +118,7 @@
                     <div class="bg-black py-2 collapse-inner rounded">
                         <a class="nav-link" href="{{ route('transaksi.index') }}">
                             <i class="fa-solid fa-money-bill-trend-up"></i>
-                            <span>Transaksi aktif</span></a>
+                            <span>Transaksi Lama</span></a>
                         <a class="nav-link" href="{{ route('transaksi.baru') }}">
                             <i class="fa-solid fa-money-bill-trend-up"></i>
                             <span>Transaksi Baru</span></a>

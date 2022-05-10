@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Penjualan;
 use Illuminate\Http\Request;
 
@@ -9,12 +10,12 @@ class PenjualanController extends Controller
     public function create()
     {
         $penjualan = new Penjualan();
-        $penjualan->id_penjualan = null;
-        $penjualan->total_item = null;
-        $penjualan->total_harga = null;
-        $penjualan->diskon = null;
-        $penjualan->bayar = null;
-        $penjualan->diterima = null;
+        $penjualan->id_member = null;
+        $penjualan->total_item = 0;
+        $penjualan->total_harga = 0;
+        $penjualan->diskon = 0;
+        $penjualan->bayar = 0;
+        $penjualan->diterima = 0;
         $penjualan->id_user = auth()->id();
         $penjualan->save();
 
