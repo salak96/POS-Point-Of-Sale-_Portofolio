@@ -107,6 +107,7 @@
 
             <!-- Heading -->
             <li class="nav-item">
+                @if (auth()->user()->level == '0')            
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                     aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-folder"></i>
@@ -123,6 +124,7 @@
                             <span>Transaksi Baru</span></a>
                     </div>
                 </div>
+                
                     <div class="sidebar-heading">
                      Report
                     </div>
@@ -131,7 +133,7 @@
                             <i class="fa-brands fa-readme"></i>
                             <span>Laporan</span></a>
                     </li>
-        
+                    @endif
             <!-- Heading -->
             <div class="sidebar-heading">
                 SYSTEM

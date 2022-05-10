@@ -17,7 +17,8 @@ class PenjualanDetailController extends Controller
         $member = Member::orderBy('nama')->get();
         $diskon = Setting::first()->diskon ?? 0;
 
-        // Cek apakah ada transaksi yang sedang berjalan
+        return view('penjualan_detail.index', compact('produk', 'member', 'diskon',  'penjualan', 'memberSelected'));
+        // //Cek apakah ada transaksi yang sedang berjalan
         // if ($id_penjualan = session('id_penjualan')) {
         //     $penjualan = Penjualan::find($id_penjualan);
         //     $memberSelected = $penjualan->member ?? new Member();
