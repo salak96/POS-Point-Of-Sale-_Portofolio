@@ -1,6 +1,6 @@
 @extends('layouts.admin-layout',
 [
-    'title' => "Daftar Penjualan Detail",
+    'title' => "Daftar Penjualan ",
    
     ]
 )
@@ -63,6 +63,7 @@
                         <th>Nama</th>
                         <th>Harga</th>
                         <th width="15%">Jumlah</th>
+                        <th>Diskon</th>
                         <th>Subtotal</th>
                         <th width="15%"><i class="fa fa-cog"></i></th>
                     </thead>
@@ -111,7 +112,8 @@
     </div>
 </div>
 
-@includeIf('pembelian_detail.produk')
+@includeIf('penjualan_detail.produk')
+@includeIf('penjualan_detail.member')
 @endsection
 
 @push('scripts')
@@ -119,20 +121,22 @@
     let table, table2;
     $(function () {
         $('body').addClass('sidebar-collapse');
-        table = $('.table-pembelian').DataTable({
+
+        table = $('.table-penjualan').DataTable({
             responsive: true,
             processing: true,
             serverSide: true,
             autoWidth: false,
             ajax: {
-                url: '{{ route('pembelian_detail.data', $id_penjualan) }}',
+                url: '{{ route('transaksi.data', $id_penjualan) }}',
             },
             columns: [
                 {data: 'DT_RowIndex', searchable: false, sortable: false},
                 {data: 'kode_produk'},
                 {data: 'nama_produk'},
-                {data: 'harga_beli'},
+                {data: 'harga_jual'},
                 {data: 'jumlah'},
+                {data: 'diskon'},
                 {data: 'subtotal'},
                 {data: 'aksi', searchable: false, sortable: false},
             ],
@@ -157,7 +161,7 @@
                 alert('Jumlah tidak boleh lebih dari 10000');
                 return;
             }
-            $.post(`{{ url('/pembelian_detail') }}/${id}`, {
+            $.post(`{{ url('/penjualan_detail') }}/${id}`, {
                     '_token': $('[name=csrf-token]').attr('content'),
                     '_method': 'put',
                     'jumlah': jumlah
@@ -182,6 +186,7 @@
             $('.form-pembelian').submit();
         });
     });
+
     function tampilProduk() {
         $('#modal-produk').modal('show');
     }
@@ -195,7 +200,7 @@
         tambahProduk();
     }
     function tambahProduk() {
-        $.post('{{ route('pembelian_detail.store') }}', $('.form-produk').serialize())
+        $.post('{{ route('transaksi.store') }}', $('.form-produk').serialize())
             .done(response => {
                 $('#kode_produk').focus();
                 table.ajax.reload(() => loadForm($('#diskon').val()));
@@ -204,6 +209,9 @@
                 alert('Tidak dapat menyimpan data');
                 return;
             });
+    }
+    function tampilMember() {
+        $('#modal-member').modal('show');
     }
     function deleteData(url) {
         if (confirm('Yakin ingin menghapus data terpilih?')) {
@@ -223,7 +231,7 @@
     function loadForm(diskon = 0) {
         $('#total').val($('.total').text());
         $('#total_item').val($('.total_item').text());
-        $.get(`{{ url('/pembelian_detail/loadform') }}/${diskon}/${$('.total').text()}`)
+        $.get(`{{ url('/transaksi/loadform') }}/${diskon}/${$('.total').text()}$/0`)
             .done(response => {
                 $('#totalrp').val('Rp. '+ response.totalrp);
                 $('#bayarrp').val('Rp. '+ response.bayarrp);

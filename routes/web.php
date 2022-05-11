@@ -61,23 +61,25 @@ Route::group(['middleware' => ['auth']], function () {
      Route::get('/pembelian/{id}/create', [PembelianController::class, 'create'])->name('pembelian.create');
       Route::resource('/pembelian', PembelianController::class)
             ->except('create');
+    //setting
+    Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');
+    Route::get('/setting/first', [SettingController::class, 'show'])->name('setting.show');
+    Route::post('/setting', [SettingController::class, 'update'])->name('setting.update');
 
-    //pembelian_detail
+    //pembelian_detail 
         Route::get('/pembelian_detail/{id}/data', [PembelianDetailController::class, 'data'])->name('pembelian_detail.data');
         Route::get('/pembelian_detail/loadform/{diskon}/{total}', [PembelianDetailController::class, 'loadForm'])->name('pembelian_detail.load_form');
         Route::resource('/pembelian_detail', PembelianDetailController::class)
             ->except('create', 'show', 'edit');
 
-    //penjualan
+    //penjualan & penjualan_detail
     Route::get('/transaksi/baru',[PenjualanController::class, 'create'])->name('transaksi.baru');
+    Route::get('/transaksi/{id}/data',[PenjualanDetailController::class, 'data'])->name('transaksi.data');
+    Route::get('/transaksi/loadform/{diskon}/{total}/{diterima}',[PenjualanDetailController::class, 'loadform'])->name('transaksi.load_form');
     Route::resource('/transaksi', PenjualanDetailController::class)
         ->except('show');
  
-    //setting
-    
-    Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');
-    Route::get('/setting/first', [SettingController::class, 'show'])->name('setting.show');
-    Route::post('/setting', [SettingController::class, 'update'])->name('setting.update');
+   
 
 });
 
