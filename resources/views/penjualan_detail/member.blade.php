@@ -23,7 +23,8 @@
                                 <td>{{ $item->telepon }}</td>
                                 <td>{{ $item->alamat }}</td>
                                 <td>
-                                    <a href="{{ route('pembelian.create', $item->id_member) }}" class="btn btn-primary btn-xs btn-flat">
+                                    <a href="#" class="btn btn-primary btn-xs btn-flat"
+                                        onclick="pilihMember('{{ $item->id_member }}', '{{ $item->kode_member }}')">
                                         <i class="fa fa-check-circle"></i>
                                         Pilih
                                     </a>

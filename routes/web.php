@@ -71,9 +71,10 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/pembelian_detail/loadform/{diskon}/{total}', [PembelianDetailController::class, 'loadForm'])->name('pembelian_detail.load_form');
         Route::resource('/pembelian_detail', PembelianDetailController::class)
             ->except('create', 'show', 'edit');
-
+ 
     //penjualan & penjualan_detail
     Route::get('/transaksi/baru',[PenjualanController::class, 'create'])->name('transaksi.baru');
+    Route::post('/transaksi/simpan', [PenjualanController::class, 'store'])->name('transaksi.simpan');
     Route::get('/transaksi/{id}/data',[PenjualanDetailController::class, 'data'])->name('transaksi.data');
     Route::get('/transaksi/loadform/{diskon}/{total}/{diterima}',[PenjualanDetailController::class, 'loadform'])->name('transaksi.load_form');
     Route::resource('/transaksi', PenjualanDetailController::class)

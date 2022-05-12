@@ -15,20 +15,19 @@ class PenjualanDetailController extends Controller
     {
         $produk = Produk::orderBy('nama_produk')->get();
         $member = Member::orderBy('nama')->get();
-        $setting = Setting::first();
+        $diskon = Setting::first()->diskon ?? 0;
 
-      
-        // //Cek apakah ada transaksi yang sedang berjalan
+        // Cek apakah ada transaksi yang sedang berjalan
         if ($id_penjualan = session('id_penjualan')) {
             $penjualan = Penjualan::find($id_penjualan);
             $memberSelected = $penjualan->member ?? new Member();
 
-            return view('penjualan_detail.index', compact('produk', 'member','setting', 'id_penjualan'));
+            return view('penjualan_detail.index', compact('produk', 'member', 'diskon', 'id_penjualan', 'penjualan', 'memberSelected'));
         } else {
-            if (auth()->user()->level == 0) {
+            if (auth()->user()->level == 1) {
                 return redirect()->route('transaksi.baru');
             } else {
-                return redirect()->route('dashboard');
+                return redirect()->route('home');
             }
         }
     }
@@ -76,6 +75,7 @@ class PenjualanDetailController extends Controller
             ->rawColumns(['aksi', 'kode_produk', 'jumlah'])
             ->make(true);
     }
+
     public function store(Request $request)
     {
         $produk = Produk::where('id_produk', $request->id_produk)->first();
@@ -94,18 +94,35 @@ class PenjualanDetailController extends Controller
 
         return response()->json('Data berhasil disimpan', 200);
     }
-
-    public function loadForm($diskon = 0, $total, $diterima)
+    public function update(Request $request, $id)
     {
-        $bayar = $total - ($diskon /100 * $total);
-        $kembali = ($diterima !=0 ? $diterima - $bayar : 0);
-        $data  = [
+        $detail = PenjualanDetail::find($id);
+        $detail->jumlah = $request->jumlah;
+        $detail->subtotal = $detail->harga_jual * $request->jumlah - (($detail->diskon * $request->jumlah) / 100 * $detail->harga_jual);;
+        $detail->update();
+    }
+
+    public function destroy($id)
+    {
+        $detail = PenjualanDetail::find($id);
+        $detail->delete();
+
+        return response(null, 204);
+    }
+
+    public function loadForm($diskon = 0, $total = 0, $diterima = 0)
+    {
+        $bayar   = $total - ($diskon / 100 * $total);
+        $kembali = ($diterima != 0) ? $diterima - $bayar : 0;
+        $data    = [
             'totalrp' => format_uang($total),
             'bayar' => $bayar,
             'bayarrp' => format_uang($bayar),
-            'terbilang' => ucwords(terbilang($bayar).'Rupiah'),
+            'terbilang' => ucwords(terbilang($bayar). ' Rupiah'),
             'kembalirp' => format_uang($kembali),
+            'kembali_terbilang' => ucwords(terbilang($kembali). ' Rupiah'),
         ];
+
         return response()->json($data);
     }
 }
