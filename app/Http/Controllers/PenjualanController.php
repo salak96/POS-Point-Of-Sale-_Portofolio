@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Penjualan;
 use App\Models\PenjualanDetail;
 use App\Models\Produk;
@@ -13,9 +12,9 @@ class PenjualanController extends Controller
 {
     public function index()
     {
+
         return view('penjualan.index');
     }
-
     public function data()
     {
         $penjualan = Penjualan::with('member')->orderBy('id_penjualan', 'desc')->get();
@@ -75,8 +74,26 @@ class PenjualanController extends Controller
 
     public function store(Request $request)
     {
-       
-        return $request;
+        $penjualan = Penjualan::findOrFail($request->id_penjualan);
+        $penjualan->id_member = $request->id_member;
+        $penjualan->total_item = $request->total_item;
+        $penjualan->total_harga = $request->total;
+        $penjualan->diskon = $request->diskon;
+        $penjualan->bayar = $request->bayar;
+        $penjualan->diterima = $request->diterima;
+        $penjualan->update();
+
+        $detail = PenjualanDetail::where('id_penjualan', $penjualan->id_penjualan)->get();
+        foreach ($detail as $item) {
+            $item->diskon = $request->diskon;
+            $item->update();
+
+            $produk = Produk::find($item->id_produk);
+            $produk->stok -= $item->jumlah;
+            $produk->update();
+        }
+
+        return redirect()->route('transaksi.selesai');
     }
 
     public function show($id)
@@ -122,5 +139,42 @@ class PenjualanController extends Controller
         $penjualan->delete();
 
         return response(null, 204);
+    }
+    public function selesai()
+    {
+        $setting = Setting::first();
+
+        return view('penjualan.selesai', compact('setting'));
+    }
+
+    public function notaKecil()
+    {
+        $setting = Setting::first();
+        $penjualan = Penjualan::find(session('id_penjualan'));
+        if (! $penjualan) {
+            abort(404);
+        }
+        $detail = PenjualanDetail::with('produk')
+            ->where('id_penjualan', session('id_penjualan'))
+            ->get();
+        
+        return view('penjualan.nota_kecil', compact('setting', 'penjualan', 'detail'));
+    }
+
+    public function notaBesar()
+    {
+        $setting = Setting::first();
+        $penjualan = Penjualan::find(session('id_penjualan'));
+        if (! $penjualan) {
+            abort(404);
+        }
+        $detail = PenjualanDetail::with('produk')
+            ->where('id_penjualan', session('id_penjualan'))
+            ->get();
+
+        $pdf = PDF::loadView('penjualan.nota_besar', compact('setting', 'penjualan', 'detail'));
+        $pdf->setPaper(0,0,609,440, 'potrait');
+        return $pdf->stream('Transaksi-'. date('Y-m-d-his') .'.pdf');
+        
     }
 }

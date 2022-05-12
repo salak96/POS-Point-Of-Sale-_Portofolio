@@ -78,7 +78,7 @@
                             <input type="hidden" name="total" id="total">
                             <input type="hidden" name="total_item" id="total_item">
                             <input type="hidden" name="bayar" id="bayar">
-                            <input type="hidden" name="id_member" id="id_member" value="0">
+                            <input type="hidden" name="id_member" id="id_member" value="{{ $memberSelected->id_member }}">
 
                             <div class="form-group row">
                                 <label for="totalrp" class="col-lg-2 control-label">Total</label>
@@ -90,7 +90,7 @@
                                 <label for="kode_member" class="col-lg-2 control-label">Member</label>
                                 <div class="col-lg-8">
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="kode_member" value="0">
+                                        <input type="text" class="form-control" id="kode_member" value="{{ $memberSelected->id_member }}">
                                         <span class="input-group-btn">
                                             <button onclick="tampilMember()" class="btn btn-info btn-flat" type="button"><i class="fa fa-arrow-right"></i></button>
                                         </span>
@@ -101,8 +101,8 @@
                                 <label for="diskon" class="col-lg-2 control-label">Diskon</label>
                                 <div class="col-lg-8">
                                     <input type="number" name="diskon" id="diskon" class="form-control" 
-                                        value="0" 
-                                        readonly>
+                                    value="{{ ! empty($memberSelected->id_member) ? $diskon : 0 }}" 
+                                    readonly>
                                 </div>
                             </div>
                             <div class="form-group row">
