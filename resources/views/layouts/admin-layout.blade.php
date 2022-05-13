@@ -129,7 +129,7 @@
                      Report
                     </div>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{ route('laporan.index') }}">
                             <i class="fa-brands fa-readme"></i>
                             <span>Laporan</span></a>
                     </li>

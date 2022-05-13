@@ -9,6 +9,7 @@ use App\Http\Controllers\PembelianDetailController;
 use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\PenjualanDetailController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\SettingController;
 use Illuminate\Support\Facades\Route;
 
@@ -91,14 +92,16 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/transaksi/nota-kecil', [PenjualanController::class, 'notaKecil'])->name('transaksi.nota_kecil');
     Route::get('/transaksi/nota-besar', [PenjualanController::class, 'notaBesar'])->name('transaksi.nota_besar');
     
-
-
     //penjualan_detail
     Route::get('/transaksi/{id}/data',[PenjualanDetailController::class, 'data'])->name('transaksi.data');
     Route::get('/transaksi/loadform/{diskon}/{total}/{diterima}',[PenjualanDetailController::class, 'loadform'])->name('transaksi.load_form');
     Route::resource('/transaksi', PenjualanDetailController::class)
         ->except('show');
- 
+    
+    //laporan
+    Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan.index');
+    Route::get('/laporan/data/{awal}/{akhir}', [LaporanController::class, 'data'])->name('laporan.data');
+    Route::get('/laporan/pdf/{awal}/{akhir}', [LaporanController::class, 'exportPDF'])->name('laporan.export_pdf');;
    
 
 });
