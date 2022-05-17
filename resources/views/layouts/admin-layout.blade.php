@@ -135,6 +135,15 @@
                             <span>Laporan</span></a>
                     </li>
                     @endif
+            <!-- usere -->
+            <div class="sidebar-heading">
+               Management User
+               </div>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route ('user.index')}}">
+                            <i class="fa-solid fa-users-gear"></i>
+                            <span>User</span></a>
+                    </li>
             <!-- Heading -->
             <div class="sidebar-heading">
                 SYSTEM

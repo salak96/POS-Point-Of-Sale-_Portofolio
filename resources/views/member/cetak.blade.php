@@ -42,6 +42,15 @@
             font-weight: bold;
             color: #fff !important;
         }
+        .telepon {
+            position: absolute;
+            top: 120pt;
+            right: 16pt;
+            font-size: 10pt;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            color: rgb(255, 10, 10) !important;
+        }
         .barcode {
             position: absolute;
             top: 105pt;
@@ -62,7 +71,7 @@
     </style>
 </head>
 <body>
-    <section style="border: 2px solid rgb(0, 0, 0)">
+    <section style="border: 2px solid rgb(200, 0, 0)">
         <table width="100%">
             @foreach ($datamember as $key => $data)
                 <tr>
@@ -75,7 +84,7 @@
                                     <img src="{{ public_path($setting->path_logo) }}" alt="logo">
                                 </div>
                                 <div class="nama">{{ $item->nama }}</div>
-        
+                                <div class="telepon">{{ $item->telepon }}</div>
                                 <div class="barcode text-left">
                                     <img src="data:image/png;base64, {{ DNS2D::getBarcodePNG("$item->kode_member", 'QRCODE') }}" alt="qrcode"
                                         height="45"
