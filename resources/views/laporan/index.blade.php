@@ -1,7 +1,7 @@
 @extends('layouts.admin-layout',
 [
 
-    'title' => "laporan pendapatan" .tanggal_indonesia($tanggalAwal, false)."s/d" .tanggal_indonesia($tanggalAkhir, false)
+    'title' =>"laporan pendapatan " .tanggal_indonesia($tanggalAwal, false). " s/d " .tanggal_indonesia($tanggalAkhir, false)
    
     ]
 )

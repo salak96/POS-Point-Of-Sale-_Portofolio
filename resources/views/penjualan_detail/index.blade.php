@@ -16,7 +16,7 @@
         padding: 10px;
         background: #f0f0f0;
     }
-    .table-pembelian tbody tr:last-child {
+    .table-penjualan tbody tr:last-child {
         display: none;
     }
     @media(max-width: 768px) {
@@ -29,6 +29,10 @@
 </style>
 @endpush
 
+@section('breadcrumb')
+    @parent
+    <li class="active">Transaksi Penjaualn</li>
+@endsection
 
 @section('content')
 <div class="row">
@@ -90,7 +94,7 @@
                                 <label for="kode_member" class="col-lg-2 control-label">Member</label>
                                 <div class="col-lg-8">
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="kode_member" value="{{ $memberSelected->id_member }}">
+                                        <input type="text" class="form-control" id="kode_member" value="{{ $memberSelected->kode_member }}">
                                         <span class="input-group-btn">
                                             <button onclick="tampilMember()" class="btn btn-info btn-flat" type="button"><i class="fa fa-arrow-right"></i></button>
                                         </span>
@@ -101,8 +105,8 @@
                                 <label for="diskon" class="col-lg-2 control-label">Diskon</label>
                                 <div class="col-lg-8">
                                     <input type="number" name="diskon" id="diskon" class="form-control" 
-                                    value="{{ ! empty($memberSelected->id_member) ? $diskon : 0 }}" 
-                                    readonly>
+                                        value="{{ ! empty($memberSelected->id_member) ? $diskon : 0 }}" 
+                                        readonly>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -253,7 +257,6 @@
         $('#diterima').val(0).focus().select();
         hideMember();
     }
-
     function hideMember() {
         $('#modal-member').modal('hide');
     }
