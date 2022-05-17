@@ -87,7 +87,8 @@
                     });
             }
         });
-        $ ('[name=select_all]').on('click', function () {
+        
+        $('[name=select_all]').on('click', function () {
             $(':checkbox').prop ('checked', this.checked);
         });
     });
