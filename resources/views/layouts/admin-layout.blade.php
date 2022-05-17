@@ -44,7 +44,8 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">USER<sup></sup></div>
+                <div class="sidebar-brand-text mx-3"><sup></sup>
+                    {{ auth()->user()->name }}</div>
             </a>
 
             <!-- Divider -->
