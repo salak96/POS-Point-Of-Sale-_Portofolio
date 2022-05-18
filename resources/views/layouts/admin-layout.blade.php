@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    {{-- <link rel="icon" href="{{ url ($setting->path_logo) }}" type="image/png"> --}}
+
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
@@ -149,7 +151,7 @@
                 SYSTEM
             </div>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ route ('setting.index') }}">
                     <i class="fa-solid fa-gear"></i>
                     <span>Setting</span></a>
             </li>
@@ -459,6 +461,13 @@
 
     <!-- validator -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.js">
+    <!--preview image-->
+    <script>
+    function preview(selector,temporaryFile,width=200) {
+        $(selector).empty();
+        $(selector).append(`<img src="${window.URL.createObjectURL(temporaryFile)}" width="${width}">`);
+    }
+    </script>
 
     @stack('scripts')
 

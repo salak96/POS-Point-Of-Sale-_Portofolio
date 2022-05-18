@@ -106,7 +106,11 @@ Route::group(['middleware' => ['auth']], function () {
     //user
     Route::get('/user/data', [UserController::class, 'data'])->name('user.data');
     Route::resource('/user', UserController::class);
-   
+
+    //setting
+    Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');
+    Route::get('/setting/first', [SettingController::class, 'show'])->name('setting.show');
+    Route::post('/setting', [SettingController::class, 'update'])->name('setting.update');
 
 });
 
