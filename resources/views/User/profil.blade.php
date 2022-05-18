@@ -6,11 +6,6 @@
 )
 
 
-@section('breadcrumb')
-    @parent
-    <li class="active">Edit Profil</li>
-@endsection
-
 @section('content')
 <div class="row">
     <div class="col-lg-12">

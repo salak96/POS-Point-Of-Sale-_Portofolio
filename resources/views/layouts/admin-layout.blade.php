@@ -28,7 +28,11 @@
     <!-- Custom styles for this template-->
     <link href="{{asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
     <script src="https://kit.fontawesome.com/b95a244235.js" crossorigin="anonymous"></script>
-
+    <style>
+        img {
+          border-radius: 50%;
+        }
+        </style>
     @stack('css')
 
 </head>
@@ -42,9 +46,9 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('user.profil') }}">
+                <div class="sidebar-brand-icon ">
+                    <img class="img-profile circle img-profil" src="{{ url(auth()->user()->foto ?? '') }}" alt="User Image" width="40" height="20">
                 </div>
                 <div class="sidebar-brand-text mx-3"><sup></sup>
                     {{ auth()->user()->name }}</div>
@@ -331,13 +335,13 @@
 
                     <!-- Nav Item - User Information user -->
                     <li class="nav-item dropdown no-arrow">
-                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                        <a class="nav-link dropdown-toggle img-profil" href="#" id="userDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="mr-2 d-none d-lg-inline text-gray-600 small">
                                 {{ auth()->user()->name }}
 
                             </span>
-                            <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
+                            <img class="img-profile circle img-profil" src="{{ url(auth()->user()->foto ?? '') }}" alt="User Image" >
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -346,11 +350,11 @@
                                 <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                                 {{ auth()->user()->email }}
                             </a>
-                            <a class="dropdown-item" href="/login">
+                            <a class="dropdown-item" href="{{ route('user.profil') }}">
                                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Profil
                             </a>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="{{ route('setting.index') }}">
                                 <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Settings
                             </a>
