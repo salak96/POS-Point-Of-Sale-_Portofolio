@@ -29,7 +29,11 @@
     <link href="{{asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
     <script src="https://kit.fontawesome.com/b95a244235.js" crossorigin="anonymous"></script>
     <style>
-        img {
+       .img-profile-circle-img-profil{
+            background-color: #fff;
+            border-radius: 100%;
+            height: 50px;
+            width: 50px;
           border-radius: 50%;
         }
         </style>
@@ -48,7 +52,7 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('user.profil') }}">
                 <div class="sidebar-brand-icon ">
-                    <img class="img-profile circle img-profil" src="{{ url(auth()->user()->foto ?? '') }}" alt="User Image" width="40" height="20">
+                    <img class="img-profile-circle-img-profil" src="{{ url(auth()->user()->foto ?? '') }}" alt="User Image" width="40" height="20">
                 </div>
                 <div class="sidebar-brand-text mx-3"><sup></sup>
                     {{ auth()->user()->name }}</div>
