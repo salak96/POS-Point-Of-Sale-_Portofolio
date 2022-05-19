@@ -8,7 +8,7 @@ use App\Http\Controllers\PembelianController;
 use App\Http\Controllers\PembelianDetailController;
 use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\PenjualanDetailController;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserController;
@@ -32,11 +32,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard') ;
-})->middleware(['auth'])->name('dashboard');
 
 Route::group(['middleware' => ['auth']], function () {
+    //dashboard
+    Route::get('/home', [DashboardController::class, 'index'])->name('dashboard');
+    
     //kategori
     Route::get('/kategori/data', [KategoriController::class,'data'])->name('kategori.data');
     Route::resource('/kategori',KategoriController::class);

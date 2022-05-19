@@ -29,11 +29,18 @@
     <link href="{{asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
     <script src="https://kit.fontawesome.com/b95a244235.js" crossorigin="anonymous"></script>
     <style>
-       .img-profile-circle-img-profil{
+       .img-profile-circle-img-profil2{
             background-color: #fff;
             border-radius: 100%;
-            height: 50px;
-            width: 50px;
+            height: 35px;
+            width: 35px;
+          border-radius: 50%;
+        }
+        .img-profile-circle-img-profil{
+            background-color: #fff;
+            border-radius: 100%;
+            height: 40px;
+            width: 40px;
           border-radius: 50%;
         }
         </style>
@@ -345,7 +352,7 @@
                                 {{ auth()->user()->name }}
 
                             </span>
-                            <img class="img-profile circle img-profil" src="{{ url(auth()->user()->foto ?? '') }}" alt="User Image" >
+                            <img class="img-profile-circle-img-profil2" src="{{ url(auth()->user()->foto ?? '') }}" alt="User Image" >
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
