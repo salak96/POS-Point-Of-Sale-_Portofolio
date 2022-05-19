@@ -35,7 +35,7 @@ Route::get('/', function () {
 
 Route::group(['middleware' => ['auth']], function () {
     //dashboard
-    Route::get('/home', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     
     //kategori
     Route::get('/kategori/data', [KategoriController::class,'data'])->name('kategori.data');
