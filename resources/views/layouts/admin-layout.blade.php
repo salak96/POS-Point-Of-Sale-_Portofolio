@@ -77,7 +77,8 @@
 
             <!-- Divider -->
             <hr class="sidebar-divider">
-
+            @if (auth()->user()->level == '1')
+    
             <!-- Heading -->
             <div class="sidebar-heading">
                 Master
@@ -101,7 +102,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ route ('supplier.index') }}">
-                    <i class="fa-brands fa-supple"></i>
+                    <i class="fa-solid fa-truck-field"></i>
                     <span>Supplier</span></a>
             </li>
 
@@ -170,6 +171,28 @@
                     <i class="fa-solid fa-gear"></i>
                     <span>Setting</span></a>
             </li>
+            @else
+            <div class="bg-white py-2  col-l-3 collapse-inner rounded">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+                    aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Penjualan</span>
+
+                </a>
+                </a>
+                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="nav-link" href="{{ route('transaksi.index') }}">
+                            <i class="fa-solid fa-money-bill-trend-up"></i>
+                            <span>Transaksi Lama</span></a>
+                        <a class="nav-link" href="{{ route('transaksi.baru') }}">
+                            <i class="fa-solid fa-money-bill-trend-up"></i>
+                            <span>Transaksi Baru</span></a>
+                    </div>
+                    </div>
+                </div>
+
+            @endif
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
@@ -465,7 +488,16 @@
 
     <!-- Custom styles for this page -->
     <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css"') }}" rel="stylesheet">
+       <!-- Custom scripts for all pages-->
+       <script src="asset('js/sb-admin-2.min.js')"></script>
 
+       <!-- Page level plugins -->
+       <script src="{{ asset('vendor/chart.js/Chart.min.js') }}"></script>
+   
+       <!-- Page level custom scripts -->
+       <script src="{{ asset ('js/demo/chart-area-demo.js') }}"></script>
+       <script src="{{asset ('js/demo/chart-pie-demo.js"') }}"></script>
+   
 
     <!-- Page level plugins -->
     <script src="{{ asset('vendor/datatables/jquery.dataTables.min.js') }}"></script>
