@@ -9,7 +9,10 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>MOCA_SHOPE-Register</title>
+    <title>Register</title>
+      <!-- manual icon -->
+      <link rel="icon" type="image/x-icon" href="{{ asset('/img/logo.png') }}">
+
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">

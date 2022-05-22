@@ -13,7 +13,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // view()->composer('admin-layout', function ($view) {
+        // view()->composer('layouts/admin-layout', function ($view) {
         //     $view->with('setting', Setting::first());
         // });
         // view()->composer('layouts.auth', function ($view) {

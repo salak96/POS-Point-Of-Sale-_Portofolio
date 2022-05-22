@@ -14,10 +14,11 @@ class SettingTableSeeder extends Seeder
      */
     public function run()
     {
+        
         DB::table('setting')->insert([
-            'id_setting' => 1,
-            'nama_perusahaan' => 'Toko Kami',
-            'alamat' => 'Jl. Jogja-solo no. 1',
+            'id_setting' => 0,
+            'nama_perusahaan' => 'Toko Berlian',
+            'alamat' => 'Jl.karangdowo-pedan Ds. Songgo langgit',
             'telepon' => '081234779987',
             'tipe_nota' => 1, // kecil
             'diskon' => 5,

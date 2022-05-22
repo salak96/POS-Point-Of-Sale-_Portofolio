@@ -36,6 +36,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::group(['middleware' => 'level:1'], function () {
+    
         Route::get('/kategori/data', [KategoriController::class, 'data'])->name('kategori.data');
         Route::resource('/kategori', KategoriController::class);
 
@@ -76,6 +77,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/transaksi/selesai', [PenjualanController::class, 'selesai'])->name('transaksi.selesai');
         Route::get('/transaksi/nota-kecil', [PenjualanController::class, 'notaKecil'])->name('transaksi.nota_kecil');
         Route::get('/transaksi/nota-besar', [PenjualanController::class, 'notaBesar'])->name('transaksi.nota_besar');
+        Route::get('/profil', [UserController::class, 'profil'])->name('user.profil');
+        Route::post('/profil', [UserController::class, 'updateProfil'])->name('user.update_profil');
 
         Route::get('/transaksi/{id}/data', [PenjualanDetailController::class, 'data'])->name('transaksi.data');
         Route::get('/transaksi/loadform/{diskon}/{total}/{diterima}', [PenjualanDetailController::class, 'loadForm'])->name('transaksi.load_form');
@@ -96,10 +99,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/setting', [SettingController::class, 'update'])->name('setting.update');
     });
  
-    Route::group(['middleware' => 'level:1,2'], function () {
-        Route::get('/profil', [UserController::class, 'profil'])->name('user.profil');
-        Route::post('/profil', [UserController::class, 'updateProfil'])->name('user.update_profil');
-    });
+    // Route::group(['middleware' => 'level:1,2'], function () {
+    //     Route::get('/profil', [UserController::class, 'profil'])->name('user.profil');
+    // //     Route::post('/profil', [UserController::class, 'updateProfil'])->name('user.update_profil');
+    // });
 });
     
 

@@ -8,6 +8,7 @@ use App\Models\Pengeluaran;
 use App\Models\Penjualan;
 use App\Models\Produk;
 use App\Models\Supplier;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 
 
@@ -18,6 +19,7 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         $kategori = Kategori::count();
@@ -82,9 +84,9 @@ class DashboardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        return Setting::first();
     }
 
     /**
