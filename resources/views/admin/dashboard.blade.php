@@ -129,73 +129,69 @@
 <!-- manual grafik -->
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script>
-function IDRFormatter(angka, prefix) {
-    var number_string = angka.toString().replace(/[^,\d]/g, ''),
-        split = number_string.split(','),
-        sisa = split[0].length % 3,
-        rupiah = split[0].substr(0, sisa),
-        ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+    function idrCurency(number)
+    {
+        return parseInt(number).toLocaleString('id-ID', {
+            style: 'currency',
+            currency: 'IDR',
+        });
+    }
+    console.log(idrCurency(1000000));
+    
+    $(function() {
+    Highcharts.setOptions({
 
-    if (ribuan) {
-        var separator = sisa ? '.' : '';
-        rupiah += separator + ribuan.join('.');
+    lang: {
+        decimalPoint: ',',
+        thousandsSep: '.'
     }
 
-    rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
-    return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
-}
-console.log(IDRFormatter(1000, 'Rp. '));  
+    });
+    Highcharts.chart('chart-pendapatan', {
+        chart: {
+            type: 'column'
+        },
+        labels:{
+            
+            formatter : idrCurency(10)
+        },
 
-    $(function() {
-  Highcharts.chart('chart-pendapatan', {
-    chart: {
-        type: 'column'
-    },
-    labels:{
-        formatter : function () {
-            return IDRFormatter(this.value, 'Rp.');
-        }
-    },
-
-    title: {
-        text: 'Laporan Pendapatan'
-    },
-
-    xAxis: {
-        categories: {{ json_encode($data_tanggal) }},
-        crosshair: true
-    },
-    yAxis: {
         title: {
-            text: 'Rupiah'
-        }
-    },
+            text: 'Laporan Pendapatan'
+        },
 
-    tooltip: {
-        headerFormat: '<span style="font-size:10px">{series.name}</span><table>',
-        pointFormat: '<tr><td style="color:{series.color};padding:0">Rp.</td>' +
-            '<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
-        footerFormat: '</table>',
-        shared: true,
-        useHTML: true
-    },
-    plotOptions: {
-        column: {
-            pointPadding: 0.2,
-            borderWidth: 0
-        }
-    },
-    series: [{
-        name: 'Total Pendapatan',
-        data: [{{ implode(',', $data_pendapatan) }}]
-    
-    }]
-    
-});
-});
+        xAxis: {
+            categories: {{ json_encode($data_tanggal) }},
+            crosshair: true
+        },
+        yAxis: {
+            title: {
+                text: 'Rupiah'
+            }
+        },
 
-              
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{series.name}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">Rp.</td>' +
+                '<td style="padding:0"><b>{point.y}</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: 'Total Pendapatan',
+            data: [{{ implode(',', $data_pendapatan) }}]
+        
+        }]
+        
+    });
+    });        
 </script>
 
 @endpush
-
