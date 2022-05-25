@@ -10,7 +10,7 @@ This App POS(Point Of Sales) on Laravel 9
 1. git clone https://github.com/salak96/POS-Point-Of-Sale-_Portofolio.git
 2. ketik `composer update` atau `composer install`
 3. Edit file `env.example` ke `env`
-4. Edit DATABASE=mocaku
+4. Edit `DB_DATABASE=`  ke  `DB_DATABASE=mocadata`
 5. Run `php artisan key:generate`
 6. Migrate database `php artisan migrate`
 7. Seeder table User, Pengaturan ketik `php artisan db:seed`
