@@ -7,7 +7,7 @@ This App POS(Point Of Sales) on Laravel 9
 3. [milonBarcode]
 
 ## Installation
-1. git clone https://github.com/salak96/POS-Point-Of-Sale-_Portofolio.git
+1. `git clone https://github.com/salak96/POS-Point-Of-Sale-_Portofolio.git`
 2. ketik `composer update` atau `composer install`
 3. Edit file `env.example` ke `env`
 4. Edit `DB_DATABASE=`  ke  `DB_DATABASE=mocadata`
