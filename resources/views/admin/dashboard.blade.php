@@ -137,7 +137,6 @@
 @endsection
 
 @push('scripts')
-<script src="{{ asset('public/js/demo/chart-area-demo.js') }}"></script>
     <!-- manual grafik -->
     <script src="https://code.highcharts.com/highcharts.js"></script>
 <script>
@@ -157,13 +156,14 @@
     yAxis: {
         min: 0,
         title: {
-            text: 'Total (pendapatan)'
+            text: 'Rupiah'
         }
     },
+
     tooltip: {
-        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-            '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+        headerFormat: '<span style="font-size:10px">{series.name}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">Rp.</td>' +
+            '<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
         footerFormat: '</table>',
         shared: true,
         useHTML: true
@@ -175,7 +175,7 @@
         }
     },
     series: [{
-        name: 'Rupiah',
+        name: 'Total Pendapatan',
         data: [{{ implode(',', $data_pendapatan) }}]
     
     }]
