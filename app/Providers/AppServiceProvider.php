@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Models\Setting;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,9 +14,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // view()->composer('layouts/admin-layout', function ($view) {
-        //     $view->with('setting', Setting::first());
-        // });
+        view()->composer('layouts.admin-layout', function ($view) {
+            $view->with('setting', Setting::first());
+        });
         // view()->composer('layouts.auth', function ($view) {
         //     $view->with('setting', Setting::first());
         // });

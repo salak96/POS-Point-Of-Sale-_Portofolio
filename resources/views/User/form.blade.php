@@ -18,6 +18,13 @@
                             <span class="help-block with-errors"></span>
                         </div>
                     </div>
+                    {{-- <div class="form-group row">
+                        <label for="level" class="col-lg-3 col-lg-offset-1 control-label">Level</label>
+                        <div class="col-lg-6">
+                            <input type="level" name="level" id="level" class="form-control" required autofocus>
+                            <span class="help-block with-errors"></span>
+                        </div>
+                    </div> --}}
                     <div class="form-group row">
                         <label for="email" class="col-lg-3 col-lg-offset-1 control-label">Email</label>
                         <div class="col-lg-6">

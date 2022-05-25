@@ -16,7 +16,7 @@
                 </div>
             </div>
             <div class="box-footer">
-              @if ($setting->tipe_nota == 1)
+              @if ($setting->tipe_nota == 2)
                 <button class="btn btn-warning btn-flat" onclick="notaBesar('{{ route('transaksi.nota_besar') }}', 'Nota Besar')">Cetak Nota Besar</button>
                 @else
                 <button class="btn btn-danger btn-flat" onclick="notaKecil('{{ route('transaksi.nota_kecil') }}', 'Nota Kecil')">Cetak Ulang Nota Kecil</button>

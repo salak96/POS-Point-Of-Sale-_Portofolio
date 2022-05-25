@@ -9,7 +9,8 @@
 
     <!-- manual icon -->
     <link rel="icon" type="image/x-icon" href="{{ asset('/img/logo.png') }}">
-
+    {{-- <link rel="icon" href="{{ url($setting->path_logo) }}" type="image/png"> --}}
+   
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
@@ -33,15 +34,15 @@
        .img-profile-circle-img-profil2{
             background-color: #fff;
             border-radius: 100%;
-            height: 35px;
-            width: 35px;
+            height:30px;
+            width: 30px;
           border-radius: 50%;
         }
         .img-profile-circle-img-profil{
             background-color: #fff;
             border-radius: 100%;
-            height: 40px;
-            width: 40px;
+            height: 35px;
+            width: 35px;
           border-radius: 50%;
         }
         </style>
@@ -60,7 +61,7 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('user.profil') }}">
                 <div class="sidebar-brand-icon ">
-                    <img class="img-profile rounded-circle" src="img/logo.png">
+                    <img class="img-profile-circle-img-profil2" src="{{ url(auth()->user()->foto ?? asset('img/undraw_profile.svg')) }}" alt="User Image" >
 
                 </div>
                 <div class="sidebar-brand-text mx-3"><sup></sup>
@@ -128,7 +129,7 @@
 
             <!-- Heading -->
             <li class="nav-item">
-                @if (auth()->user()->level == '0')            
+                @if (auth()->user()->level == '1')            
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                     aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-folder"></i>
@@ -145,7 +146,6 @@
                             <span>Transaksi Baru</span></a>
                     </div>
                 </div>
-                
                     <div class="sidebar-heading">
                      Report
                     </div>
@@ -199,7 +199,6 @@
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
-
 
 
         </ul>
@@ -409,6 +408,10 @@
     </script>
 
     @stack('scripts')
+    
+    @yield('footer')
+        <!-- manual grafik -->
+        <script src="https://code.highcharts.com/highcharts.js"></script>
 
 </body>
 

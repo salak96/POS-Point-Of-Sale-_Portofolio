@@ -10,37 +10,21 @@
     .tampil-bayar {
         font-size: 5em;
         text-align: center;
-        height: 50px;
+        height: 100px;
     }
     .tampil-terbilang {
         padding: 10px;
-        background: #ff0303;
+        background: #f0f0f0;
     }
     .table-pembelian tbody tr:last-child {
         display: none;
     }
     @media(max-width: 768px) {
         .tampil-bayar {
-            font-size: 16px;
-            height: 10px;
-            padding-top: 4px;
-        }
-        .tampil-terbilang {
-            font-size: 1em;
-            padding: 0px;
-        }
-    @media(max-width: 400px) {
-        .tampil-bayar {
             font-size: 3em;
-            height: 10px;
-            padding-top: 4px;
+            height: 70px;
+            padding-top: 5px;
         }
-        .tampil-terbilang {
-            font-size: 1em;
-            padding: 0px;
-        }
-
-        
     }
 </style>
 @endpush

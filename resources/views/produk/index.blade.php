@@ -32,7 +32,7 @@
                             <th>Merk</th>
                             <th>Harga Beli</th>
                             <th>Harga Jual</th>
-                            <th>Diskon</th>
+                            {{-- <th>Diskon</th> --}}
                             <th>Stok</th>
                             <th width="15%"><i class="fa fa-cog"></i></th>
                         </thead>
@@ -68,7 +68,7 @@
                 {data: 'merk'},
                 {data: 'harga_beli'},
                 {data: 'harga_jual'},
-                {data: 'diskon'},
+                // {data: 'diskon'},
                 {data: 'stok'},
                 {data: 'aksi', searchable: false, sortable: false},
             ]

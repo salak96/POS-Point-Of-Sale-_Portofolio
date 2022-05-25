@@ -20,6 +20,7 @@
                         <th width="5%">No</th>
                         <th>Nama</th>
                         <th>Email</th>
+                        <th>Role level</th>
                         <th width="15%"><i class="fa fa-cog"></i></th>
                     </thead>
                 </table>
@@ -47,6 +48,7 @@
                 {data: 'DT_RowIndex', searchable: false, sortable: false},
                 {data: 'name'},
                 {data: 'email'},
+                {data: 'level'},
                 {data: 'aksi', searchable: false, sortable: false},
             ]
         });
@@ -71,6 +73,7 @@
         $('#modal-form form').attr('action', url);
         $('#modal-form [name=_method]').val('post');
         $('#modal-form [name=name]').focus();
+        $('#modal-form [name=level]').focus();
         $('#password, #password_confirmation').attr('required', true);
     }
     function editForm(url) {
@@ -80,11 +83,13 @@
         $('#modal-form form').attr('action', url);
         $('#modal-form [name=_method]').val('put');
         $('#modal-form [name=name]').focus();
+        $('#modal-form [name=level]').focus();
         $('#password, #password_confirmation').attr('required', false);
         $.get(url)
             .done((response) => {
                 $('#modal-form [name=name]').val(response.name);
                 $('#modal-form [name=email]').val(response.email);
+                $('#modal-form [name=level]').val(response.level);
             })
             .fail((errors) => {
                 alert('Tidak dapat menampilkan data');
