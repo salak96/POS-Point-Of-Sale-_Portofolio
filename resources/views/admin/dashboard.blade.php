@@ -65,12 +65,6 @@
                             <div class="col-auto">
                                 <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{ $supplier }}</div>
                             </div>
-                            <div class="col">
-                                <div class="progress progress-sm mr-2">
-                                    <div class="progress-bar bg-info" role="progressbar" style="width: 50%"
-                                        aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                     <div class="col-auto">
@@ -92,12 +86,7 @@
                             Member</div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $member }}</div>
                     </div>
-                    <div class="col">
-                        <div class="progress progress-sm mr-11">
-                            <div class="progress-bar bg-info" role="progressbar" style="width: 20%"
-                                aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
+
                     <div class="col-auto">
                         <i class="fa-solid fa-people-carry-box fa-2x text-gray-300"></i>
                     </div>
@@ -137,14 +126,37 @@
 @endsection
 
 @push('scripts')
-    <!-- manual grafik -->
-    <script src="https://code.highcharts.com/highcharts.js"></script>
+<!-- manual grafik -->
+<script src="https://code.highcharts.com/highcharts.js"></script>
 <script>
+function IDRFormatter(angka, prefix) {
+    var number_string = angka.toString().replace(/[^,\d]/g, ''),
+        split = number_string.split(','),
+        sisa = split[0].length % 3,
+        rupiah = split[0].substr(0, sisa),
+        ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+    if (ribuan) {
+        var separator = sisa ? '.' : '';
+        rupiah += separator + ribuan.join('.');
+    }
+
+    rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+    return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+}
+console.log(IDRFormatter(1000, 'Rp. '));  
+
     $(function() {
   Highcharts.chart('chart-pendapatan', {
     chart: {
         type: 'column'
     },
+    labels:{
+        formatter : function () {
+            return IDRFormatter(this.value, 'Rp.');
+        }
+    },
+
     title: {
         text: 'Laporan Pendapatan'
     },
@@ -154,7 +166,6 @@
         crosshair: true
     },
     yAxis: {
-        min: 0,
         title: {
             text: 'Rupiah'
         }
@@ -179,8 +190,10 @@
         data: [{{ implode(',', $data_pendapatan) }}]
     
     }]
+    
 });
 });
+
               
 </script>
 

@@ -28,6 +28,8 @@ class DashboardController extends Controller
 
         while (strtotime($tanggal_awal) <= strtotime($tanggal_akhir)) {
             $data_tanggal[] = (int) substr($tanggal_awal, 8, 2);
+         
+
 
             $total_penjualan = Penjualan::where('created_at', 'LIKE', "%$tanggal_awal%")->sum('bayar');
             $total_pembelian = Pembelian::where('created_at', 'LIKE', "%$tanggal_awal%")->sum('bayar');
@@ -37,6 +39,8 @@ class DashboardController extends Controller
             $data_pendapatan[] += $pendapatan;
 
             $tanggal_awal = date('Y-m-d', strtotime("+1 day", strtotime($tanggal_awal)));
+
+            
         }
 
         $tanggal_awal = date('Y-m-01');
