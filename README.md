@@ -1,18 +1,18 @@
- PORTFOLIO
+# Inventory Web
+This App POS(Point Of Sales) on Laravel 9
 
-~Tentang Aplikasi
-Aplikasi POS atau point of sales adalah aplikasi yang digunakan untuk mengelola transaksi pada sebuah toko atau oleh kasir. Aplikasi ini dibuat menggunakan Laravel v9.* dan minimal PHP v8 jadi apabila pada saat proses instalasi atau penggunaan terdapat error atau bug kemungkinan karena versi dari PHP yang tidak support. Aplikasi ini dibangun dengan Framework Laravel,jQuery,Ajax,dan database MySQL
+## Requirement
+1. [PHP 8]
+2. [Laravel 9]
+3. [milonBarcode]
 
-~Instalasi
-git clone https://github.com/salak96/POS-Point-Of-Sale-_Portofolio.git
-
-~Setup Aplikasi
-Jalankan perintah 
-1.composer update atau composer install
-2.Copy file .env dari .env.example\
-Konfigurasi file .env
-DB_CONNECTION=mysqlDB_HOST=127.0.0.1DB_PORT=3306DB_DATABASE=mocakuDB_USERNAME=rootDB_PASSWORD=
-3.Generate keyphp artisan key:generate
-4.Migrate databasephp artisan migrate
-5.Seeder table User, Pengaturan ketik php artisan db:seed
-6.Menjalankan aplikasi php artisan serve‍‍‍
+## Installation
+1. git clone https://github.com/salak96/POS-Point-Of-Sale-_Portofolio.git
+2. composer update atau composer install
+3. Edit file env.example ke env
+4. Edit DATABASE=mocaku
+5. Run `php artisan key:generate`
+6. Migrate database 'php artisan migrate'
+7. Seeder table User, Pengaturan ketik 'php artisan db:seed'
+8. Run `npm run dev`
+9. Run the server with command `php artisan serve`
