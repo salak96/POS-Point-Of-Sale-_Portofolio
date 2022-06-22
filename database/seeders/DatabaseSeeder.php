@@ -18,6 +18,12 @@ class DatabaseSeeder extends Seeder
             SettingTableSeeder::class,
             UserSeeder::class,
             AdminSeeder::class,
+            KategoriSeeder::class,
+            ProdukSeeder::class,
+            MemberSeeder::class,
+            SupplierSeeder::class,
+            PengeluaranSeeder::class,
+            // PembelianSeeder::class,
         ]);
     }
 }
