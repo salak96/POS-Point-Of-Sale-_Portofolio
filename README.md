@@ -17,3 +17,6 @@ This App POS(Point Of Sales) on Laravel 9
 8. Run `npm run dev`
 9. Run the server with command `php artisan serve`
 10. Open Browser http://127.0.0.1:8000/
+11. Login
+    `email`     adminpos@gmail.com'
+    `password`  ('admintoko')

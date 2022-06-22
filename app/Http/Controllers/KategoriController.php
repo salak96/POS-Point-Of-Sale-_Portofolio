@@ -13,6 +13,7 @@ class KategoriController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
+    
     {
         return view('kategori.index');
     }
